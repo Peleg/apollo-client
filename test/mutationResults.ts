@@ -804,10 +804,15 @@ describe('mutation results', () => {
 
     client = new ApolloClient({networkInterface});
 
-    const watchedQuery = client.watchQuery({query: variableQuery, variables: variables1});
+    const watchedQuery = client.watchQuery({
+      query: variableQuery,
+      variables: variables1,
+      returnPartialData: false,
+    });
 
     const firstSubs = watchedQuery.subscribe({
       next: () => null,
+      error: done,
     });
 
     // Cancel the query right away!
